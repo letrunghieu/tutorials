@@ -1,0 +1,4 @@
+apiVersion: v2
+name: istio-circuit-breaker
+version: 1.0.0
+description: Demo Istio circuit breaker feature

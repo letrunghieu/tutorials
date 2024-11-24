@@ -1,0 +1,20 @@
+{{- if .Values.circuitBreaker.enabled -}}
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: httpbin
+spec:
+  host: {{ .Values.upstream.service.name }}
+  trafficPolicy:
+    connectionPool:
+      tcp:
+        maxConnections: {{ .Values.circuitBreaker.maxConnections }}
+      http:
+        http1MaxPendingRequests: 1
+        maxRequestsPerConnection: {{ .Values.circuitBreaker.maxRequestsPerConnection }}
+    outlierDetection:
+      consecutive5xxErrors: {{ .Values.circuitBreaker.consecutive5xxErrors }}
+      interval: 1s
+      baseEjectionTime: {{ .Values.circuitBreaker.baseEjectionTime }}
+      maxEjectionPercent: {{ .Values.circuitBreaker.maxEjectionPercent }}
+{{- end }}
