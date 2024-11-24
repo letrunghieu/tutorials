@@ -5,11 +5,11 @@ upstream:
   service:
     name: httpbin
 downstream:
-  replicas: 3
+  replicas: 5
   istio:
     enabled: true
 circuitBreaker:
-  enabled: true
+  enabled: false
   maxConnections: 1
   maxPendingRequests: 1
   maxRequestsPerConnection: 1

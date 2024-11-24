@@ -13,11 +13,12 @@ spec:
     app: fortio
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: fortio-deploy
+  name: fortio
 spec:
   replicas: {{ .Values.downstream.replicas }}
+  serviceName: fortio
   selector:
     matchLabels:
       app: fortio
